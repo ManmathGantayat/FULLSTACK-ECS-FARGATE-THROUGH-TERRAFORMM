@@ -29,21 +29,21 @@ data "aws_security_group" "sg" {
 
 
 resource "aws_db_instance" "rds" {
-  allocated_storage      = 20
+  allocated_storage      = 10
   identifier = "book-rds"
   db_subnet_group_name   = aws_db_subnet_group.sub-grp.id
   engine                 = "mysql"
-  engine_version         = "8.4.4"
+  engine_version         = "8.0"
   instance_class         = "db.t3.micro"
   multi_az               = true
   db_name                = "books-project"
   username               = "admin"
-  password               = "veeranarni"
+  password               = "aws123456"
   skip_final_snapshot    = true
   vpc_security_group_ids = [data.aws_security_group.sg.id]
   depends_on = [ aws_db_subnet_group.sub-grp ]
   publicly_accessible = true
-  backup_retention_period = 7
+  backup_retention_period = 1
 
   
   tags = {
