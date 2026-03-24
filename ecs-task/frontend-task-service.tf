@@ -8,7 +8,7 @@ resource "aws_lb" "front-elb" {
   subnets            = [data.aws_subnet.public1.id, data.aws_subnet.public2.id]
 }
 
-# Target Group
+# Fronted Target Group
 resource "aws_lb_target_group" "front-tg" {
   name        = "frontend-target-group"
   port        = 80
@@ -26,6 +26,22 @@ resource "aws_lb_listener" "front_listener" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.front-tg.arn
+  }
+}
+# 🔥 Listener Rule → Backend Routing
+resource "aws_lb_listener_rule" "backend_rule" {
+  listener_arn = aws_lb_listener.front_listener.arn
+  priority     = 100
+
+  condition {
+    path_pattern {
+      values = ["/books*", "/add*"]
+    }
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.back-tg.arn
   }
 }
 
