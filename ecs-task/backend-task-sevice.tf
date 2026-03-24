@@ -31,7 +31,7 @@ resource "aws_lb_listener" "back_listener" {
 
 # ECS Task Definition
 resource "aws_ecs_task_definition" "back-task" {
-  family                   = "backend"
+  family                   = "backend-ecs-task"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   memory                   = "512"
