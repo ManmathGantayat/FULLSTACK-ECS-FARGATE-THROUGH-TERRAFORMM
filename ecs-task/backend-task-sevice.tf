@@ -1,11 +1,11 @@
 
-resource "aws_lb" "back" {
-  name               = "backend"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [data.aws_security_group.sg.id]
-  subnets            = [data.aws_subnet.public1.id, data.aws_subnet.public2.id]
-}
+# resource "aws_lb" "back" {
+ # name               = "backend"
+ # internal           = false
+ # load_balancer_type = "application"
+ # security_groups    = [data.aws_security_group.sg.id]
+ # subnets            = [data.aws_subnet.public1.id, data.aws_subnet.public2.id]
+# }
 
 # Target Group
 resource "aws_lb_target_group" "back-tg" {
@@ -17,16 +17,16 @@ resource "aws_lb_target_group" "back-tg" {
 }
 
 # Listener for ALB
-resource "aws_lb_listener" "back_listener" {
-  load_balancer_arn = aws_lb.back.arn
-  port              = 80
-  protocol          = "HTTP"
+# resource "aws_lb_listener" "back_listener" {
+#  load_balancer_arn = aws_lb.back.arn
+ # port              = 80
+ # protocol          = "HTTP"
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.back-tg.arn
-  }
-}
+ # default_action {
+  #  type             = "forward"
+  #  target_group_arn = aws_lb_target_group.back-tg.arn
+  #}
+#}
 
 
 # ECS Task Definition
