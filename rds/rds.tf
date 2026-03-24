@@ -47,7 +47,7 @@ resource "aws_db_instance" "rds" {
 
   
   tags = {
-    DB_identifier = "book-rds"
+    DB_identifier = "bookrds"
   }
 }
 
